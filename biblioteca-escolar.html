@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Biblioteca Escolar · Catálogo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e9dcbd;--paper:#f8f0dc;--ink:#2b1d12;--muted:#6b5a45;--line:#cdb88f;--wood:#3b2312;--wood2:#6b4226;--gold:#c99a3b;--brand:#7a1f1f;--brand-ink:#f8ecd0;--bad:#9b1c1c;--ok:#2f6b3a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a130e;--paper:#251b13;--ink:#efe2c6;--muted:#b3a082;--line:#4a3b2a;--wood:#0f0a06;--wood2:#3a2415;--gold:#d4a64a;--brand:#c25b4a;--brand-ink:#1a130e;--bad:#f08b80;--ok:#8fcf9a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1a130e;--paper:#251b13;--ink:#efe2c6;--muted:#b3a082;--line:#4a3b2a;--wood:#0f0a06;--wood2:#3a2415;--gold:#d4a64a;--brand:#c25b4a;--brand-ink:#1a130e;--bad:#f08b80;--ok:#8fcf9a;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;color:var(--ink);font:16px/1.55 Lora,Georgia,serif;background:var(--bg) radial-gradient(ellipse at top,rgba(255,255,255,.18),transparent 60%)}
+h1,h2,h3,.ser{font-family:"Playfair Display",Georgia,serif}
+button,input,select,.ui{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:linear-gradient(var(--wood2),var(--wood));border-bottom:4px solid var(--gold);color:#f3e3b8;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.wrap{max-width:1060px;margin:0 auto;padding:0 16px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 0}
+.logo{font:700 22px "Playfair Display",Georgia,serif;letter-spacing:.5px}.logo small{display:block;font:italic 13px Lora,Georgia,serif;opacity:.8;letter-spacing:0}
+.user{display:flex;gap:10px;align-items:center;font:14px system-ui,sans-serif}
+.badge{border:1px solid var(--gold);border-radius:999px;padding:3px 12px;font-size:13px}
+nav{display:flex;gap:4px;overflow-x:auto}
+nav button{border:0;border-bottom:3px solid transparent;background:none;color:#e6d3a3;padding:9px 14px;cursor:pointer;font-size:15px;white-space:nowrap}
+nav button[aria-current="true"]{color:#fff;border-color:var(--gold);font-weight:600}
+main{padding:22px 0 56px}
+h2.t{margin:0 0 4px;font-size:28px}.sub{margin:0 0 18px;color:var(--muted);font-style:italic}
+input,select{background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:9px 11px;font-size:15px;min-width:0;width:100%}
+input[type=checkbox]{width:auto}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.btn{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:6px;padding:8px 13px;cursor:pointer;font-size:14px}
+.btn.p{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}.btn.d{color:var(--bad)}.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.g{background:none;border-color:var(--gold);color:#f3e3b8}
+.filters{display:grid;grid-template-columns:2fr 1fr auto;gap:10px;margin-bottom:20px;align-items:center}
+.filters label,.f label{display:flex;align-items:center;gap:6px;font:14px system-ui,sans-serif;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:22px 16px}
+.card{background:var(--paper);border:1px solid var(--line);border-bottom:9px solid var(--wood2);border-radius:4px 4px 2px 2px;padding:16px 14px 14px;text-align:center;box-shadow:0 2px 6px rgba(60,30,10,.18)}
+.cvw{position:relative;width:132px;margin:0 auto 12px;filter:drop-shadow(3px 5px 5px rgba(0,0,0,.4))}
+.cvw::after{content:"";position:absolute;inset:0 auto 0 0;width:12px;background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(255,255,255,.12) 60%,transparent);border-radius:3px 0 0 3px;pointer-events:none}
+.cv{display:block;width:100%;aspect-ratio:120/176;object-fit:cover;border-radius:3px 7px 7px 3px}
+.card h3{margin:0;font-size:16px;line-height:1.25}.meta{color:var(--muted);font-size:13.5px;font-style:italic}
+.chip{display:inline-block;border:1px solid var(--ok);color:var(--ok);border-radius:999px;padding:1px 10px;font:600 12px system-ui,sans-serif}
+.chip.n{color:var(--gold);border-color:var(--gold)}.chip.b{color:var(--bad);border-color:var(--bad)}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px;justify-content:center}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:18px}
+.stat{background:var(--paper);border:1px solid var(--line);border-top:4px solid var(--gold);padding:10px 12px}
+.stat b{display:block;font:700 26px "Playfair Display",serif}.stat span{color:var(--muted);font:13px system-ui,sans-serif}
+.tw{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:4px;margin-bottom:18px}
+table{border-collapse:collapse;width:100%;min-width:560px;font:14.5px system-ui,sans-serif}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{color:var(--muted);font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.5px}tr:last-child td{border-bottom:0}
+.tr{display:flex;align-items:center;gap:10px}.tr .cvw{width:34px;margin:0;filter:none}.tr .cvw::after{width:4px}
+.empty{text-align:center;color:var(--muted);padding:40px 12px;font-style:italic}
+.grp h3{margin:18px 0 8px;font-size:18px}
+.f{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin-bottom:16px}
+/* login */
+.login{min-height:100vh;display:grid;place-items:center;padding:20px}
+.ficha{width:min(430px,100%);background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--brand);padding:26px 24px 22px;box-shadow:0 10px 30px rgba(40,20,5,.35);
+background-image:repeating-linear-gradient(transparent 0 31px,rgba(110,140,170,.28) 31px 32px);background-position:0 66px;background-color:var(--paper)}
+.ficha h1{margin:0;font-size:27px;text-align:center}.ficha .sub{text-align:center;margin-bottom:14px}
+.seg{display:flex;border:1px solid var(--brand);border-radius:6px;overflow:hidden;margin:10px 0}
+.seg button{flex:1;border:0;background:var(--paper);color:var(--brand);padding:8px;cursor:pointer;font-size:14px}
+.seg button[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink)}
+.ficha form{display:grid;gap:9px}.ficha label{display:grid;gap:3px;font:13px system-ui,sans-serif;color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.link{background:none;border:0;color:var(--brand);text-decoration:underline;cursor:pointer;font-size:14px;margin-top:6px}
+.demo{font:12.5px system-ui,sans-serif;color:var(--muted);border-top:1px dashed var(--line);margin-top:10px;padding-top:8px;background:var(--paper)}
+dialog{border:1px solid var(--line);border-top:4px solid var(--brand);border-radius:6px;background:var(--paper);color:var(--ink);width:min(480px,92vw);padding:20px}
+dialog::backdrop{background:rgba(20,10,0,.55)}dialog form{display:grid;gap:10px}dialog label{display:grid;gap:4px;font:14px system-ui,sans-serif;color:var(--muted)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--wood);color:#f3e3b8;padding:10px 16px;border-radius:6px;border:1px solid var(--gold);font:14px system-ui,sans-serif;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}
+.toast.on{opacity:1}
+@media(max-width:700px){.filters{grid-template-columns:1fr 1fr}.filters input{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<dialog id="dlg"><form id="bookform">
+  <h2 id="dlgtitle" class="ser" style="margin:0">Livro</h2>
+  <label>Título<input name="title" required></label>
+  <label>Autor<input name="author" required></label>
+  <div class="two"><label>Gênero<input name="genre" list="gl" required></label><label>Ano<input name="year" type="number" min="1000" max="2100"></label></div>
+  <div class="two"><label>Exemplares<input name="copies" type="number" min="1" value="1" required></label><label>Estante<input name="shelf" placeholder="Ex.: B-3"></label></div>
+  <label>Capa (imagem, opcional)<input name="img" type="file" accept="image/*"></label>
+  <label style="display:flex;gap:6px;align-items:center"><input type="checkbox" name="rmimg"> Remover capa enviada (usar capa padrão)</label>
+  <div class="row" style="justify-content:flex-end"><button type="button" class="btn" id="cancel">Cancelar</button><button class="btn p" type="submit">Salvar</button></div>
+</form></dialog>
+<dialog id="retdlg"><form id="retform">
+  <h2 class="ser" style="margin:0">Receber devolução</h2>
+  <p id="retinfo" class="meta" style="margin:0"></p>
+  <label>Estado do livro<select name="cond"><option>Bom estado</option><option>Com avarias</option><option>Extraviado</option></select></label>
+  <label>Observações (opcional)<input name="obs" maxlength="140"></label>
+  <div class="row" style="justify-content:flex-end"><button type="button" class="btn" id="retcancel">Cancelar</button><button class="btn p" type="submit">Confirmar devolução</button></div>
+</form></dialog>
+<datalist id="gl"></datalist>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const KEY="bibliotecaEscolar.v3",SERIES=["6º ano","7º ano","8º ano","9º ano","1º ano EM","2º ano EM","3º ano EM"],TURMAS=["A","B","C","D"];
+const today=()=>new Date().setHours(0,0,0,0);
+const seed=()=>({books:[
+ {id:1,title:"Dom Casmurro",author:"Machado de Assis",genre:"Romance",year:1899,copies:3,shelf:"A-1"},
+ {id:2,title:"Memórias Póstumas de Brás Cubas",author:"Machado de Assis",genre:"Romance",year:1881,copies:2,shelf:"A-1"},
+ {id:3,title:"O Alienista",author:"Machado de Assis",genre:"Conto",year:1882,copies:2,shelf:"A-2"},
+ {id:4,title:"O Cortiço",author:"Aluísio Azevedo",genre:"Romance",year:1890,copies:2,shelf:"A-3"},
+ {id:5,title:"Iracema",author:"José de Alencar",genre:"Romance",year:1865,copies:2,shelf:"A-3"},
+ {id:6,title:"Vidas Secas",author:"Graciliano Ramos",genre:"Romance",year:1938,copies:3,shelf:"B-1"},
+ {id:7,title:"A Hora da Estrela",author:"Clarice Lispector",genre:"Romance",year:1977,copies:1,shelf:"B-2"},
+ {id:8,title:"O Pequeno Príncipe",author:"Antoine de Saint-Exupéry",genre:"Infantojuvenil",year:1943,copies:4,shelf:"C-1"},
+ {id:9,title:"Capitães da Areia",author:"Jorge Amado",genre:"Romance",year:1937,copies:2,shelf:"B-1"},
+ {id:10,title:"A Moreninha",author:"Joaquim Manuel de Macedo",genre:"Romance",year:1844,copies:1,shelf:"A-4"},
+ {id:11,title:"Sagarana",author:"João Guimarães Rosa",genre:"Conto",year:1946,copies:1,shelf:"B-3"},
+ {id:12,title:"Poemas Escolhidos",author:"Cecília Meireles",genre:"Poesia",year:1939,copies:2,shelf:"D-1"}],
+ users:[{id:1,role:"professor",name:"Profa. Helena Rocha",login:"prof",pass:"1234"},
+ {id:2,role:"aluno",name:"Lucas Andrade",login:"000111222333-1",pass:"1234",serie:"7º ano",turma:"A"},
+ {id:3,role:"aluno",name:"Marina Souza",login:"000111222334-2",pass:"1234",serie:"8º ano",turma:"B"},
+ {id:4,role:"aluno",name:"Pedro Lima",login:"000111222335-X",pass:"1234",serie:"7º ano",turma:"A"}],
+ loans:[{id:1,bookId:1,uid:3,status:"emprestado",due:today()-2*864e5}],
+ code:"BIBLIO2026",nextId:13,nextLoan:2,nextUser:5});
+let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!S||!S.books)S=seed();
+let sess=null;try{sess=+localStorage.getItem(KEY+".s")||null}catch(e){}
+let U={tab:"acervo",q:"",genre:"",avail:false,fs:"",ft:"",fst:"",ret:null,editing:null},L={mode:"entrar",role:"aluno"};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S));sess?localStorage.setItem(KEY+".s",sess):localStorage.removeItem(KEY+".s")}catch(e){toast("Não foi possível salvar (armazenamento cheio).")}};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt=t=>new Date(t).toLocaleDateString("pt-BR");
+const act=l=>l.status==="reservado"||l.status==="emprestado";
+const free=b=>b.copies-S.loans.filter(l=>l.bookId===b.id&&act(l)).length;
+const late=l=>l.status==="emprestado"&&l.due<today();
+const bookOf=id=>S.books.find(b=>b.id===id),userOf=id=>S.users.find(u=>u.id===id);
+const me=()=>userOf(sess),isProf=()=>me()?.role==="professor";
+const klass=u=>u?.role==="aluno"?`${u.serie} ${u.turma}`:"";
+let tt;const toast=m=>{const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),2400)};
+const hue=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return h};
+function wrap(t,n=12){const L=[];let c="";for(const x of t.split(" ")){if((c+" "+x).trim().length>n&&c){L.push(c);c=x}else c=(c+" "+x).trim()}if(c)L.push(c);return L.slice(0,5)}
+function cover(b){
+ const inner=b.img?`<img class="cv" src="${b.img}" alt="Capa de ${esc(b.title)}">`:(()=>{const T=wrap(b.title),y0=84-(T.length-1)*9,a=b.author.length>24?b.author.split(" ").pop():b.author;
+ return`<svg class="cv" viewBox="0 0 120 176" role="img" aria-label="Capa de ${esc(b.title)}"><rect width="120" height="176" fill="hsl(${hue(b.title)} 42% 24%)"/><rect x="7" y="7" width="106" height="162" fill="none" stroke="#d4a64a" stroke-width="1.5"/><rect x="11" y="11" width="98" height="154" fill="none" stroke="#d4a64a" stroke-width=".6"/><text x="60" y="34" text-anchor="middle" fill="#d4a64a" font-size="13">❦</text>${T.map((l,i)=>`<text x="60" y="${y0+i*18}" text-anchor="middle" fill="#f3e3b8" font-family="Playfair Display,Georgia,serif" font-size="14" font-weight="700">${esc(l)}</text>`).join("")}<line x1="30" x2="90" y1="132" y2="132" stroke="#d4a64a" stroke-width=".8"/><text x="60" y="149" text-anchor="middle" fill="#e6cf9a" font-family="Georgia,serif" font-size="8.5" font-style="italic">${esc(a)}</text></svg>`})();
+ return`<div class="cvw">${inner}</div>`}
+
+/* ---------- LOGIN ---------- */
+function viewLogin(){
+ const al=L.role==="aluno",cad=L.mode==="cadastro";
+ return`<div class="login"><div class="ficha">
+ <h1>📚 Biblioteca Escolar</h1><p class="sub">${cad?"Ficha de cadastro":"Ficha de acesso ao catálogo"}</p>
+ <div class="seg" role="group" aria-label="Perfil"><button data-role="aluno" aria-pressed="${al}">Sou aluno</button><button data-role="professor" aria-pressed="${!al}">Sou professor</button></div>
+ <form id="${cad?"signup":"signin"}">
+ ${cad?`<label>Nome completo<input name="name" required autocomplete="name"></label>`:""}
+ ${al?`<div class="two" style="grid-template-columns:2fr 1fr"><label>RA (Registro do Aluno)<input name="ra" required inputmode="numeric" pattern="[0-9]{5,12}" title="Somente números, de 5 a 12 dígitos" placeholder="000123456789" autocomplete="username"></label><label>Dígito<input name="dig" required maxlength="2" placeholder="X"></label></div>`:`<label>Usuário (login da Secretaria Escolar Digital)<input name="login" required autocomplete="username"></label>`}
+ ${cad&&al?`<div class="two"><label>Série<select name="serie">${SERIES.map(s=>`<option>${s}</option>`).join("")}</select></label><label>Turma<select name="turma">${TURMAS.map(s=>`<option>${s}</option>`).join("")}</select></label></div>`:""}
+ ${cad&&!al?`<label>Código da escola<input name="code" required></label>`:""}
+ <label>Senha<input name="pass" type="password" required minlength="4" autocomplete="${cad?"new-password":"current-password"}"></label>
+ <button class="btn p" type="submit">${cad?"Cadastrar e entrar":"Entrar"}</button></form>
+ <div style="text-align:center"><button class="link" data-mode="${cad?"entrar":"cadastro"}">${cad?"Já tenho cadastro — entrar":"Primeiro acesso? Cadastre-se"}</button></div>
+ ${cad?"":`<div class="demo">Para testar — aluno: RA <b>000111222333</b> dígito <b>1</b> / senha <b>1234</b> · professor: <b>prof</b> / <b>1234</b>. Código de cadastro de professores: <b>BIBLIO2026</b> (alterável em “Gerenciar livros”).</div>`}
+ </div></div>`}
+
+/* ---------- VIEWS ---------- */
+const tabs=()=>isProf()?[["acervo","Acervo"],["emprestimos","Empréstimos"],["turmas","Turmas"],["gerenciar","Gerenciar livros"]]:[["acervo","Acervo"],["meus","Meus livros"]];
+const genres=()=>[...new Set(S.books.map(b=>b.genre))].sort();
+function viewAcervo(){
+ const q=U.q.toLowerCase(),u=me();
+ const list=S.books.filter(b=>(!q||(b.title+" "+b.author+" "+b.genre).toLowerCase().includes(q))&&(!U.genre||b.genre===U.genre)&&(!U.avail||free(b)>0)).sort((a,b)=>a.title.localeCompare(b.title,"pt"));
+ const mine=id=>S.loans.find(l=>l.bookId===id&&act(l)&&l.uid===u.id);
+ return`<h2 class="t">Acervo</h2><p class="sub">${isProf()?"Consulte o acervo e acompanhe a disponibilidade.":"Escolha um livro, reserve e retire na biblioteca (máximo de 3 ativos por aluno)."}</p>
+ <div class="filters"><input id="q" type="search" placeholder="Buscar por título, autor ou gênero…" value="${esc(U.q)}" aria-label="Buscar">
+ <select id="g" aria-label="Gênero"><option value="">Todos os gêneros</option>${genres().map(g=>`<option ${U.genre===g?"selected":""}>${esc(g)}</option>`).join("")}</select>
+ <label class="ui" style="display:flex;gap:6px;align-items:center;color:var(--muted);font-size:14px"><input type="checkbox" id="av" ${U.avail?"checked":""}> Só disponíveis</label></div>
+ ${list.length?`<div class="grid">${list.map(b=>{const f=free(b),m=mine(b.id);return`<article class="card">${cover(b)}<h3>${esc(b.title)}</h3><div class="meta">${esc(b.author)}${b.year?" · "+b.year:""}</div><div class="meta">${esc(b.genre)} · Estante ${esc(b.shelf||"—")}</div>
+ <div class="row"><span class="chip ${f?"":"n"}">${f?`${f} de ${b.copies} disponível(is)`:"Indisponível"}</span></div>
+ ${isProf()?"":`<div class="row">${m?`<span class="chip n">${m.status==="reservado"?"Reservado por você":"Com você"}</span>`:`<button class="btn p" data-reserve="${b.id}" ${f?"":"disabled"}>Reservar</button>`}</div>`}</article>`}).join("")}</div>`:`<div class="empty">Nenhum livro encontrado.</div>`}`}
+const dl=l=>Math.floor((today()-l.due)/864e5);
+const stOk=l=>!U.fst||(U.fst==="ativos"&&act(l))||(U.fst==="atrasados"&&late(l))||(U.fst==="pend"&&l.ret&&l.status==="emprestado")||(U.fst==="hist"&&!act(l));
+const dueTxt=l=>l.status==="emprestado"?fmt(l.due)+(l.renewed?" (renovado)":""):l.status==="devolvido"&&l.retAt?"Devolvido em "+fmt(l.retAt):"—";
+const myActs=l=>l.status==="reservado"?`<button class="btn d" data-cancel="${l.id}">Cancelar</button>`:l.status==="emprestado"?(l.ret?`<span class="meta">Aguardando o professor</span>`:`${!l.renewed&&!late(l)?`<button class="btn" data-renew="${l.id}">Renovar +7 dias</button>`:""}<button class="btn p" data-askret="${l.id}">Avisar devolução</button>`):"";
+const chip=l=>l.status==="devolvido"?`<span class="chip">Devolvido${l.cond&&l.cond!=="Bom estado"?" · "+esc(l.cond):""}</span>`:l.status==="perdido"?`<span class="chip b">Extraviado</span>`:l.status==="reservado"?`<span class="chip n">Reservado</span>`:`${late(l)?`<span class="chip b">Atrasado ${dl(l)} dia(s)</span>`:`<span class="chip n">Emprestado</span>`}${l.ret?` <span class="chip n">Devolução avisada</span>`:""}`;
+const bt=b=>`<div class="tr">${b?cover(b):""}<div><b>${esc(b?.title||"Livro removido")}</b><div class="meta">${esc(b?.author||"")}</div></div></div>`;
+function viewMeus(){
+ const ls=S.loans.filter(l=>l.uid===sess).sort((a,b)=>b.id-a.id);
+ return`<h2 class="t">Meus livros</h2><p class="sub">Suas reservas e empréstimos, ${esc(me().name.split(" ")[0])}. Você pode renovar uma vez (+7 dias) ou avisar que vai devolver o livro.</p>
+ ${ls.length?`<div class="tw"><table><thead><tr><th>Livro</th><th>Situação</th><th>Devolução</th><th></th></tr></thead><tbody>${ls.map(l=>`<tr><td>${bt(bookOf(l.bookId))}</td><td>${chip(l)}</td><td>${dueTxt(l)}</td><td><div class="row" style="margin:0;justify-content:flex-start">${myActs(l)}</div></td></tr>`).join("")}</tbody></table></div>`:`<div class="empty">Você ainda não reservou nenhum livro. Visite o Acervo!</div>`}`}
+const fsel=()=>`<div class="f"><label>Série<select id="fs"><option value="">Todas</option>${SERIES.map(s=>`<option ${U.fs===s?"selected":""}>${s}</option>`).join("")}</select></label><label>Turma<select id="ft"><option value="">Todas</option>${TURMAS.map(s=>`<option ${U.ft===s?"selected":""}>${s}</option>`).join("")}</select></label></div>`;
+function viewEmp(){
+ const ls=S.loans.filter(l=>{const u=userOf(l.uid);return u&&(!U.fs||u.serie===U.fs)&&(!U.ft||u.turma===U.ft)&&stOk(l)}).sort((a,b)=>(!!b.ret-!!a.ret)||(act(b)-act(a))||b.id-a.id);
+ const st=[["Títulos",S.books.length],["Exemplares",S.books.reduce((a,b)=>a+b.copies,0)],["Reservados",ls.filter(l=>l.status==="reservado").length],["Emprestados",ls.filter(l=>l.status==="emprestado").length],["Atrasados",ls.filter(late).length],["Devoluções avisadas",ls.filter(l=>l.ret&&l.status==="emprestado").length]];
+ return`<h2 class="t">Empréstimos</h2><p class="sub">Filtre por série, turma e situação. Devoluções avisadas pelos alunos aparecem primeiro.</p>${fsel().replace("</div>",`<label>Situação<select id="fst">${[["","Todas"],["ativos","Ativos"],["atrasados","Atrasados"],["pend","Devolução avisada"],["hist","Histórico (devolvidos)"]].map(([v,t])=>`<option value="${v}" ${U.fst===v?"selected":""}>${t}</option>`).join("")}</select></label></div>`)}
+ <div class="stats">${st.map(([k,v])=>`<div class="stat"><b>${v}</b><span>${k}</span></div>`).join("")}</div>
+ ${ls.length?`<div class="tw"><table><thead><tr><th>Aluno</th><th>Turma</th><th>Livro</th><th>Situação</th><th>Devolução</th><th>Ações</th></tr></thead><tbody>${ls.map(l=>{const u=userOf(l.uid);return`<tr><td>${esc(u.name)}</td><td>${esc(klass(u))}</td><td>${bt(bookOf(l.bookId))}</td><td>${chip(l)}</td><td>${dueTxt(l)}</td><td><div class="row" style="margin:0">${l.status==="reservado"?`<button class="btn p" data-lend="${l.id}">Confirmar retirada</button><button class="btn d" data-cancel="${l.id}">Cancelar</button>`:""}${l.status==="emprestado"?`<button class="btn p" data-return="${l.id}">${l.ret?"Confirmar devolução":"Receber devolução"}</button>`:""}</div></td></tr>`}).join("")}</tbody></table></div>`:`<div class="empty">Nenhum registro para este filtro.</div>`}`}
+function viewTurmas(){
+ const al=S.users.filter(u=>u.role==="aluno"&&(!U.fs||u.serie===U.fs)&&(!U.ft||u.turma===U.ft)),g={};
+ al.forEach(u=>(g[klass(u)]??=[]).push(u));
+ const keys=Object.keys(g).sort((a,b)=>SERIES.indexOf(g[a][0].serie)-SERIES.indexOf(g[b][0].serie)||g[a][0].turma.localeCompare(g[b][0].turma));
+ return`<h2 class="t">Turmas</h2><p class="sub">Alunos cadastrados, separados por série e turma.</p>${fsel()}
+ ${keys.length?keys.map(k=>`<section class="grp"><h3>${esc(k)} <span class="meta">· ${g[k].length} aluno(s)</span></h3><div class="tw"><table><thead><tr><th>Aluno</th><th>RA</th><th>Livros ativos</th><th>Atrasados</th></tr></thead><tbody>${g[k].sort((a,b)=>a.name.localeCompare(b.name,"pt")).map(u=>{const m=S.loans.filter(l=>l.uid===u.id&&act(l));return`<tr><td>${esc(u.name)}</td><td>${esc(u.login)}</td><td>${m.length}</td><td>${m.filter(late).length||"—"}</td></tr>`}).join("")}</tbody></table></div></section>`).join(""):`<div class="empty">Nenhum aluno nesta turma.</div>`}`}
+function viewGer(){
+ const list=[...S.books].sort((a,b)=>a.title.localeCompare(b.title,"pt"));
+ return`<h2 class="t">Gerenciar livros</h2><p class="sub">Cadastre, edite ou remova livros e envie capas.</p>
+ <div class="row" style="justify-content:space-between;align-items:end;margin:0 0 14px"><button class="btn p" data-new>+ Novo livro</button>
+ <label class="ui" style="font-size:13px;color:var(--muted);display:grid;gap:3px">Código de cadastro de professores<input id="code" value="${esc(S.code)}" style="width:190px"></label></div>
+ <div class="tw"><table><thead><tr><th>Livro</th><th>Gênero</th><th>Estante</th><th>Disp.</th><th></th></tr></thead><tbody>${list.map(b=>`<tr><td>${bt(b)}</td><td>${esc(b.genre)}</td><td>${esc(b.shelf||"—")}</td><td>${free(b)}/${b.copies}</td><td><div class="row" style="margin:0"><button class="btn" data-edit="${b.id}">Editar</button><button class="btn d" data-del="${b.id}">Excluir</button></div></td></tr>`).join("")}</tbody></table></div>`}
+
+function render(keep){
+ const r=$("#root");
+ if(!me()){r.innerHTML=viewLogin();return}
+ const u=me();if(!tabs().some(t=>t[0]===U.tab))U.tab="acervo";
+ $("#gl").innerHTML=genres().map(g=>`<option value="${esc(g)}">`).join("");
+ const f=keep&&document.activeElement?.id==="q";
+ r.innerHTML=`<header><div class="wrap"><div class="bar"><div class="logo">📚 Biblioteca Escolar<small>Catálogo de livros</small></div>
+ <div class="user"><span class="badge">${isProf()?"Professor":"Aluno · "+esc(klass(u))}</span><span>${esc(u.name.split(" ")[0])}</span><button class="btn g" data-logout>Sair</button></div></div>
+ <nav>${tabs().map(([k,v])=>`<button data-tab="${k}" aria-current="${U.tab===k}">${v}</button>`).join("")}</nav></div></header>
+ <main class="wrap">${{acervo:viewAcervo,meus:viewMeus,emprestimos:viewEmp,turmas:viewTurmas,gerenciar:viewGer}[U.tab]()}</main>`;
+ if(f){const q=$("#q");q.focus();q.setSelectionRange(q.value.length,q.value.length)}
+}
+
+/* ---------- EVENTS ---------- */
+document.addEventListener("click",e=>{
+ const t=e.target.closest("button");if(!t)return;const d=t.dataset;
+ if(d.role){L.role=d.role;render();return}
+ if(d.mode){L.mode=d.mode;render();return}
+ if("logout" in d){sess=null;save();U.tab="acervo";render();return}
+ if(d.tab){U.tab=d.tab;render();return}
+ if(d.reserve){const b=bookOf(+d.reserve);if(!b||free(b)<1)return;
+  if(S.loans.filter(l=>l.uid===sess&&act(l)).length>=3){toast("Limite de 3 livros ativos atingido.");return}
+  S.loans.push({id:S.nextLoan++,bookId:b.id,uid:sess,status:"reservado",due:0});save();render();toast("Reserva feita! Retire o livro na biblioteca.");return}
+ if(d.cancel){S.loans=S.loans.filter(l=>l.id!==+d.cancel);save();render();toast("Reserva cancelada.");return}
+ if(d.lend){const l=S.loans.find(x=>x.id===+d.lend);l.status="emprestado";l.due=today()+14*864e5;save();render();toast("Retirada confirmada. Devolução em 14 dias.");return}
+ if(d.return){const l=S.loans.find(x=>x.id===+d.return),b=bookOf(l.bookId),u=userOf(l.uid);U.ret=l.id;
+  $("#retinfo").textContent=`${b?.title||"Livro"} · ${u.name} (${klass(u)})`+(late(l)?` · ${dl(l)} dia(s) de atraso`:"");
+  $("#retform").reset();$("#retdlg").showModal();return}
+ if(d.renew){const l=S.loans.find(x=>x.id===+d.renew);if(!l||l.renewed||late(l)||l.ret)return;l.due+=7*864e5;l.renewed=1;save();render();toast("Renovado! Nova data: "+fmt(l.due));return}
+ if(d.askret){const l=S.loans.find(x=>x.id===+d.askret);l.ret=true;save();render();toast("Pronto! Entregue o livro ao professor na biblioteca.");return}
+ if(t.id==="retcancel")$("#retdlg").close();
+ if("new" in d||d.edit){U.editing=d.edit?+d.edit:null;const b=U.editing?bookOf(U.editing):{},f=$("#bookform");
+  $("#dlgtitle").textContent=U.editing?"Editar livro":"Novo livro";
+  for(const k of["title","author","genre","year","copies","shelf"])f.elements[k].value=b[k]??(k==="copies"?1:"");
+  f.elements.img.value="";f.elements.rmimg.checked=false;$("#dlg").showModal();return}
+ if(d.del){const b=bookOf(+d.del);if(S.loans.some(l=>l.bookId===b.id&&act(l))){toast("Há reservas ou empréstimos ativos deste livro.");return}
+  if(confirm("Excluir “"+b.title+"” do acervo?")){S.books=S.books.filter(x=>x.id!==b.id);save();render();toast("Livro excluído.")}return}
+ if(t.id==="cancel")$("#dlg").close();
+});
+document.addEventListener("input",e=>{
+ if(e.target.id==="q"){U.q=e.target.value;render(true)}
+ if(e.target.id==="code"){S.code=e.target.value.trim();save()}
+});
+document.addEventListener("change",e=>{
+ const i=e.target.id;
+ if(i==="g"){U.genre=e.target.value;render()}if(i==="av"){U.avail=e.target.checked;render()}
+ if(i==="fs"){U.fs=e.target.value;render()}if(i==="ft"){U.ft=e.target.value;render()}if(i==="fst"){U.fst=e.target.value;render()}
+});
+const getLogin=f=>L.role==="aluno"?f.ra.value.replace(/\D/g,"")+"-"+f.dig.value.trim().toUpperCase():f.login.value.trim();
+document.addEventListener("submit",e=>{
+ const f=e.target;
+ if(f.id==="signin"){e.preventDefault();
+  const u=S.users.find(x=>x.role===L.role&&x.login===getLogin(f)&&x.pass===f.pass.value);
+  if(!u){toast("Usuário ou senha incorretos para este perfil.");return}
+  sess=u.id;U.tab="acervo";save();render()}
+ if(f.id==="signup"){e.preventDefault();const login=getLogin(f);
+  if(S.users.some(x=>x.login===login)){toast("Esse "+(L.role==="aluno"?"RA":"usuário")+" já está cadastrado.");return}
+  if(L.role==="professor"&&f.code.value.trim()!==S.code){toast("Código da escola incorreto.");return}
+  const u={id:S.nextUser++,role:L.role,name:f.name.value.trim(),login,pass:f.pass.value};
+  if(L.role==="aluno"){u.serie=f.serie.value;u.turma=f.turma.value}
+  S.users.push(u);sess=u.id;U.tab="acervo";save();render();toast("Bem-vindo(a), "+u.name.split(" ")[0]+"!")}
+ if(f.id==="retform"){e.preventDefault();const l=S.loans.find(x=>x.id===U.ret);if(!l)return;const c=f.cond.value;
+  l.ret=false;l.retAt=today();l.cond=c;l.obs=f.obs.value.trim();
+  if(c==="Extraviado"){l.status="perdido";const b=bookOf(l.bookId);if(b)b.copies=Math.max(0,b.copies-1)}else l.status="devolvido";
+  save();$("#retdlg").close();render();toast(c==="Extraviado"?"Registrado como extraviado. O exemplar saiu do acervo.":"Devolução registrada.")}
+ if(f.id==="bookform"){e.preventDefault();(async()=>{
+  const x=f.elements,data={title:x.title.value.trim(),author:x.author.value.trim(),genre:x.genre.value.trim(),year:+x.year.value||0,copies:Math.max(1,+x.copies.value||1),shelf:x.shelf.value.trim()};
+  const b=U.editing?bookOf(U.editing):null;let img=b?.img;
+  if(x.rmimg.checked)img=undefined;
+  if(x.img.files[0]){const r=await readImg(x.img.files[0]);if(r)img=r;else toast("Não foi possível ler a imagem.")}
+  if(img)data.img=img;
+  if(b){Object.assign(b,data);if(!img)delete b.img}else S.books.push({id:S.nextId++,...data});
+  save();$("#dlg").close();render();toast(b?"Livro atualizado.":"Livro cadastrado.")})()}
+});
+function readImg(file){return new Promise(r=>{const fr=new FileReader();fr.onload=()=>{const i=new Image();i.onload=()=>{const k=Math.min(1,300/i.width),c=document.createElement("canvas");c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext("2d").drawImage(i,0,0,c.width,c.height);r(c.toDataURL("image/jpeg",.8))};i.onerror=()=>r(null);i.src=fr.result};fr.onerror=()=>r(null);fr.readAsDataURL(file)})}
+render();
+</script>
+</body>
+</html>
